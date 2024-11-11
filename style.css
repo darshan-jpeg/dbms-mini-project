@@ -6,14 +6,29 @@ body {
     background-color: #fff;
     color: #333;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
+/* Header with Animation */
 header {
-    background-color: #ff5722;
+    background-color: #FF7043; /* Soft Orange for the header */
     color: white;
     padding: 30px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: fadeInSlideUp 1.5s ease-out;
+}
+
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 header h1 {
@@ -33,6 +48,7 @@ header p {
     gap: 40px;
     padding: 30px 10px;
     margin-top: 50px;
+    animation: fadeInSlideUp 1.5s ease-out; /* Apply the fade-in animation */
 }
 
 .card, .menu-item, .order-item, .reservation-item {
@@ -45,16 +61,30 @@ header p {
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    opacity: 0;
+    animation: fadeInCard 1.5s ease-out forwards; /* Animation for individual cards */
+}
+
+@keyframes fadeInCard {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .card:hover, .menu-item:hover, .order-item:hover, .reservation-item:hover {
     transform: translateY(-10px);
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    background-color: #FFAB91; /* Light orange for hover effect */
 }
 
 h2, h3 {
     font-size: 1.8em;
-    color: #ff5722;
+    color: #FF7043; /* Soft Orange for headings */
     margin-bottom: 10px;
 }
 
@@ -64,7 +94,7 @@ p {
 }
 
 button {
-    background-color: #ff5722;
+    background-color: #FF7043; /* Soft Orange for buttons */
     color: white;
     border: none;
     padding: 12px 25px;
@@ -76,7 +106,7 @@ button {
 }
 
 button:hover {
-    background-color: #e64a19;
+    background-color: #FF5722; /* Darker orange for hover effect */
 }
 
 /* Menu Page Specific Styles */
@@ -94,7 +124,7 @@ button:hover {
 }
 
 .menu-item h3 {
-    color: #ff5722;
+    color: #FF7043; /* Soft Orange for menu items */
 }
 
 .menu-item p {
@@ -117,7 +147,7 @@ button:hover {
 }
 
 .order-item h3 {
-    color: #ff5722;
+    color: #FF7043; /* Soft Orange for order items */
 }
 
 /* Reservation Page Specific Styles */
@@ -136,7 +166,7 @@ button:hover {
 }
 
 .reservation-item h3 {
-    color: #ff5722;
+    color: #FF7043; /* Soft Orange for reservation items */
 }
 
 /* Footer - 2024 Always at the Bottom */
@@ -144,7 +174,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: #ff5722;
+    background-color: #FF7043; /* Soft Orange for footer */
     color: white;
     text-align: center;
     padding: 15px 0;
@@ -154,6 +184,33 @@ footer {
 
 footer p {
     margin: 0;
+}
+
+/* Loading Symbol */
+.loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    display: none;
+    color: #FF7043;
+}
+
+/* Animation for Footer */
+@keyframes slideUpFooter {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    animation: slideUpFooter 1s ease-out;
 }
 
 /* Media Queries for Responsive Design */
