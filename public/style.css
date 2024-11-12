@@ -1,0 +1,227 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Header with Animation */
+header {
+    background-color: #FF7043; /* Soft Orange for the header */
+    color: white;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: fadeInSlideUp 1.5s ease-out;
+}
+
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+/* Floating Design */
+.container, .reservation-container, .menu-container, .order-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 40px;
+    padding: 30px 10px;
+    margin-top: 50px;
+    animation: fadeInSlideUp 1.5s ease-out; /* Apply the fade-in animation */
+}
+
+.card, .menu-item, .order-item, .reservation-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInCard 1.5s ease-out forwards; /* Animation for individual cards */
+}
+
+@keyframes fadeInCard {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover, .menu-item:hover, .order-item:hover, .reservation-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    background-color: #FFAB91; /* Light orange for hover effect */
+}
+
+h2, h3 {
+    font-size: 1.8em;
+    color: #FF7043; /* Soft Orange for headings */
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+button {
+    background-color: #FF7043; /* Soft Orange for buttons */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FF5722; /* Darker orange for hover effect */
+}
+
+/* Menu Page Specific Styles */
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+.menu-item {
+    width: 280px;
+    padding: 20px;
+    text-align: center;
+}
+
+.menu-item h3 {
+    color: #FF7043; /* Soft Orange for menu items */
+}
+
+.menu-item p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Order Page Specific Styles */
+.order-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+.order-item {
+    width: 280px;
+    padding: 20px;
+    text-align: center;
+}
+
+.order-item h3 {
+    color: #FF7043; /* Soft Orange for order items */
+}
+
+/* Reservation Page Specific Styles */
+.reservation-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.reservation-item {
+    width: 280px;
+    padding: 20px;
+    text-align: center;
+}
+
+.reservation-item h3 {
+    color: #FF7043; /* Soft Orange for reservation items */
+}
+
+/* Footer - 2024 Always at the Bottom */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #FF7043; /* Soft Orange for footer */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1em;
+    z-index: 9999;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Loading Symbol */
+.loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    display: none;
+    color: #FF7043;
+}
+
+/* Animation for Footer */
+@keyframes slideUpFooter {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    animation: slideUpFooter 1s ease-out;
+}
+
+/* Media Queries for Responsive Design */
+@media only screen and (max-width: 768px) {
+    .container, .reservation-container, .menu-container, .order-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card, .menu-item, .order-item, .reservation-item {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}

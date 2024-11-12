@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appetizers - Restaurant Database Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Appetizers</h1>
+        <p>Select your appetizer</p>
+    </header>
+
+    <div class="menu-page">
+        <!-- Appetizer Items Rendered Dynamically Using PHP -->
+        <?php
+        // Connect to the database
+        $conn = new mysqli("localhost", "root", "", "restaurant_db");
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Fetch appetizer data
+        $sql = "SELECT * FROM menu WHERE category = 'Appetizers'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // Output each appetizer item
+            while($row = $result->fetch_assoc()) {
+                echo "<section class='dish-card'>
+                        <img src='" . $row['image_url'] . "' alt='" . $row['name'] . "'>
+                        <h4>" . $row['name'] . "</h4>
+                        <p>" . $row['description'] . "</p>
+                        <p>Price: $" . $row['price'] . "</p>
+                        <button>Add to Cart</button>
+                      </section>";
+            }
+        } else {
+            echo "<p>No appetizers available at the moment.</p>";
+        }
+
+        $conn->close();
+        ?>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Restaurant Database Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>
