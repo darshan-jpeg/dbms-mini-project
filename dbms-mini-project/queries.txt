@@ -1,0 +1,41 @@
+CREATE TABLE customer (
+    cid INT PRIMARY KEY,
+    biriyani VARCHAR(255),
+    porotabeef VARCHAR(255),
+    pasta VARCHAR(255),
+    cheesecake VARCHAR(255),
+    lavacake VARCHAR(255),
+    payasam VARCHAR(255),
+    total DOUBLE
+);
+
+CREATE TABLE food (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    category VARCHAR(255),
+    price DOUBLE
+);
+
+INSERT INTO food (id, name, category, price) VALUES (1, 'Biriyani', 'Main Course', 250.00);
+INSERT INTO food (id, name, category, price) VALUES (2, 'Porotabeef', 'Main Course', 180.00);
+INSERT INTO food (id, name, category, price) VALUES (3, 'Pasta', 'Main Course', 150.00);
+INSERT INTO food (id, name, category, price) VALUES (4, 'Cheesecake', 'Dessert', 120.00);
+INSERT INTO food (id, name, category, price) VALUES (5, 'Lavacake', 'Dessert', 130.00);
+INSERT INTO food (id, name, category, price) VALUES (6, 'Payasam', 'Dessert', 100.00);
+
+CREATE TABLE reservations (
+	cid INT PRIMARY KEY,
+	resdt DATE,
+	FOREIGN KEY (cid) REFERENCES customer(cid)
+);
+
+
+
+ALTER TABLE reservations
+	DROP FOREIGN KEY reservations_ibfk_1;
+
+ALTER TABLE reservations
+	ADD CONSTRAINT reservations_ibfk_1
+	FOREIGN KEY (cid) REFERENCES customer(cid)
+	ON DELETE CASCADE;
+

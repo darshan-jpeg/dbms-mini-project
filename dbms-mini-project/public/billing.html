@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Billing</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Billing</h1>
+	</header>
+	<div class="container">
+		<h2>Your Order Summary</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Item</th>
+					<th>Quantity</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody id="order-summary">
+				<!-- Order summary items will be populated here -->
+			</tbody>
+		</table>
+		<h3>Total: <span id="total-amount">0</span></h3>
+		<button onclick="checkout()">Checkout</button>
+	</div>
+
+	<script>
+		// Function to load the billing details from the server
+		function loadBillingDetails() {
+			fetch('/get-billing-details')
+				.then(response => response.json())
+				.then(data => {
+					let total = 0;
+					const orderSummary = document.getElementById('order-summary');
+					orderSummary.innerHTML = ''; // Clear previous content
+
+					data.items.forEach(item => {
+						const row = document.createElement('tr');
+						row.innerHTML = `
+							<td>${item.name}</td>
+							<td>${item.quantity}</td>
+							<td>${item.price}</td>
+						`;
+						orderSummary.appendChild(row);
+						total += item.price;
+					});
+
+					document.getElementById('total-amount').innerText = total.toFixed(2);
+				})
+				.catch(error => {
+					console.error('Error fetching billing details:', error);
+					alert('Failed to load billing details.');
+				});
+		}
+
+		// Function to handle checkout and clear the customer data
+		function checkout() {
+			fetch('/checkout', {
+				method: 'POST'
+			})
+			.then(response => response.text())
+			.then(message => {
+				alert(message);
+				window.location.href = '/index.html'; // Redirect to home page after checkout
+			})
+			.catch(error => {
+				console.error('Error during checkout:', error);
+				alert('Checkout failed.');
+			});
+		}
+
+		// Load the billing details on page load
+		window.onload = loadBillingDetails;
+	</script>
+</body>
+</html>

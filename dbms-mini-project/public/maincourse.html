@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Main Course - Restaurant</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Main Course</h1>
+	</header>
+
+	<div class="menu-container">
+		<div class="menu-item">
+			<label for="biriyani">Biriyani</label>
+			<input type="number" id="biriyani" name="biriyani" min="0" value="0">
+		</div>
+		<div class="menu-item">
+			<label for="porotabeef">Porotabeef</label>
+			<input type="number" id="porotabeef" name="porotabeef" min="0" value="0">
+		</div>
+		<div class="menu-item">
+			<label for="pasta">Pasta</label>
+			<input type="number" id="pasta" name="pasta" min="0" value="0">
+		</div>
+	</div>
+
+	<button id="addToCartButton">Add to Cart</button>
+
+	<script>
+		// JavaScript to handle the Add to Cart button click
+		document.getElementById('addToCartButton').addEventListener('click', () => {
+			const data = {
+				biriyani: document.getElementById('biriyani').value,
+				porotabeef: document.getElementById('porotabeef').value,
+				pasta: document.getElementById('pasta').value
+			};
+
+			fetch('/update-cart', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => response.text())
+			.then(data => {
+				alert(data); // Display success message
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('There was an error updating the cart.');
+			});
+		});
+	</script>
+</body>
+</html>

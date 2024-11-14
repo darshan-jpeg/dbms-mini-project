@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Reservations</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Reservations</h1>
+	</header>
+
+	<div class="container">
+		<h2>Enter Reservation Date</h2>
+		<form id="reservationForm">
+			<div class="form-group">
+				<label for="reservationDate">Reservation Date</label>
+				<input type="date" id="reservationDate" name="reservationDate" required>
+			</div>
+			<button type="submit">Reserve</button>
+		</form>
+	</div>
+
+	<script>
+		document.getElementById('reservationForm').addEventListener('submit', function(event) {
+			event.preventDefault();
+
+			const reservationDate = document.getElementById('reservationDate').value;
+
+			// Send reservation date to the server for the current customer
+			fetch('/make-reservation', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: new URLSearchParams({ reservationDate })
+			})
+			.then(response => response.text())
+			.then(data => {
+				alert(data);
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				alert('Reservation failed.');
+			});
+		});
+	</script>
+</body>
+</html>
