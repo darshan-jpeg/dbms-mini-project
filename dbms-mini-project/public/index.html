@@ -12,10 +12,10 @@
 		<p>Welcome! Please enter your details</p>
 	</header>
 
-	<!-- Table Number, Name, and Reservation Date Form -->
+	<!-- Table Number and Name Form -->
 	<div class="container">
 		<div id="dineInForm">
-			<h2>Enter Your Table Number, Name, and Reservation Date</h2>
+			<h2>Enter Your Table Number and Name</h2>
 			<form id="dineInDetails" action="/submit" method="POST">
 				<div class="form-group">
 					<label for="tableNumber">Table Number</label>
@@ -24,10 +24,6 @@
 				<div class="form-group">
 					<label for="userName">Your Name</label>
 					<input type="text" id="userName" name="userName" required>
-				</div>
-				<div class="form-group">
-					<label for="reservationDate">Reservation Date</label>
-					<input type="date" id="reservationDate" name="reservationDate" required>
 				</div>
 				<button type="submit">Submit</button>
 			</form>
@@ -46,10 +42,6 @@
 				<div class="option-card">
 					<h3>Reservation</h3>
 					<button onclick="window.location.href='reservations.html'">Go to Reservations</button>
-				</div>
-				<div class="option-card">
-					<h3>Order Tracking</h3>
-					<button onclick="window.location.href='order.html'">Go to Orders</button>
 				</div>
 				<div class="option-card">
 					<h3>Billing & Payments</h3>
@@ -75,7 +67,6 @@
 			// Capture the input values
 			const tableNumber = document.getElementById('tableNumber').value;
 			const userName = document.getElementById('userName').value;
-			const reservationDate = document.getElementById('reservationDate').value;
 
 			// Perform an asynchronous POST request to the server to add customer data
 			fetch('/submit', {
@@ -85,8 +76,7 @@
 				},
 				body: new URLSearchParams({
 					tableNumber: tableNumber,
-					userName: userName,
-					reservationDate: reservationDate
+					userName: userName
 				})
 			})
 			.then(response => response.json())
