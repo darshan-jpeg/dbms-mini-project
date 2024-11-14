@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Database Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Restaurant Database Management System</h1>
+        <p>Welcome! Please enter your details</p>
+    </header>
+
+    <!-- Table Number and Name Form -->
+    <div class="container">
+        <div id="dineInForm">
+            <h2>Enter Your Table Number and Name</h2>
+            <form id="dineInDetails" action="/submit" method="POST">
+                <div class="form-group">
+                    <label for="tableNumber">Table Number</label>
+                    <input type="number" id="tableNumber" name="tableNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="userName">Your Name</label>
+                    <input type="text" id="userName" name="userName" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Menu Options (Hidden initially, shown after form submit) -->
+        <div id="menuOptions" class="hidden">
+            <h2>Welcome to the Restaurant!</h2>
+            <p>Choose what you'd like to do:</p>
+
+            <div class="options-container">
+                <div class="option-card">
+                    <h3>Menu</h3>
+                    <button onclick="window.location.href='menu.html'">Go to Menu</button>
+                </div>
+                <div class="option-card">
+                    <h3>Reservation</h3>
+                    <button onclick="window.location.href='reservation.html'">Go to Reservations</button>
+                </div>
+                <div class="option-card">
+                    <h3>Order Tracking</h3>
+                    <button onclick="window.location.href='order.html'">Go to Orders</button>
+                </div>
+                <div class="option-card">
+                    <h3>Billing & Payments</h3>
+                    <button onclick="window.location.href='billing.html'">Go to Billing</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Restaurant Database Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle form submission and show menu options
+        const form = document.getElementById('dineInDetails');
+        const dineInForm = document.getElementById('dineInForm');
+        const menuOptions = document.getElementById('menuOptions');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form from submitting the traditional way
+
+            // Capture the input values
+            const tableNumber = document.getElementById('tableNumber').value;
+            const userName = document.getElementById('userName').value;
+
+            // Perform an asynchronous POST request to the server to add customer data
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    tableNumber: tableNumber,
+                    userName: userName
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Hide the form and show the options page after the customer is added
+                dineInForm.classList.add('hidden');
+                menuOptions.classList.remove('hidden');
+                
+                // Optionally, display customer-specific data from the response
+                // Here, for example, we can display a thank you message
+                menuOptions.innerHTML += `<h3>Thank you, ${userName}! Your table number is ${tableNumber}.</h3>`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your details.');
+            });
+        });
+    </script>
+</body>
+</html>
